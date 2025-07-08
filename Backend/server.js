@@ -42,7 +42,7 @@ app.use('/api/orders', orderRouter)
 
 // API endpoint
 app.get('/', (req, res) => {
-    res.send("API ALI")
+    res.send("API WORK")
 })
 
 // Start server
