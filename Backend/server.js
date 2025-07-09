@@ -24,7 +24,7 @@ const __dirname = path.dirname(__filename)
 
 
 app.use(cors({
-  origin: 'https://e-commerce-admin-panel-psi.vercel.app', // أو '*' مؤقتًا
+  origin: '*', // أو '*' مؤقتًا
   credentials: true
 }));
 
