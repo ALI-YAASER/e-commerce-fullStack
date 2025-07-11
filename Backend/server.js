@@ -23,11 +23,23 @@ const __dirname = path.dirname(__filename)
 
 
 
+const allowedOrigins = ['https://e-commerce-frontend-pi-sooty.vercel.app'];
+
 app.use(cors({
-  origin: 'https://e-commerce-frontend-pi-sooty.vercel.app', // عدل إلى رابط الفرونت إند بالضبط
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
+  credentials: true,
 }));
+
+// 🛡️ Handle preflight requests (OPTIONS)
+app.options('*', cors());
+
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 app.use(express.urlencoded({ extended: true })); // ← يدعم form-data
 app.use(express.json());                          // ← بعده عادي
